@@ -70,7 +70,7 @@ const Products = ({ selectedCategory }: Props) => {
     },
   ];
 
-  const showAll = false;
+  const showAll = true;
 
   return (
     <div className="flex-grow-1 bg-light ">
