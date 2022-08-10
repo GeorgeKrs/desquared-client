@@ -1,0 +1,54 @@
+/* Image CSS */
+
+/* Navigation CSS */
+.navigation-style {
+  min-height: 100vh;
+  background-color: #00bfa5;
+}
+
+.navigation-item {
+  color: white !important;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navigation-item a:hover {
+  color: black;
+  text-decoration: underline !important;
+  background-color: #a7ffeb !important;
+  cursor: pointer;
+}
+
+.navigation-item-selected {
+  color: black;
+  background-color: #a7ffeb;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.navigation-item-selected:hover {
+  color: black;
+}
+
+/* Header CSS */
+.header-style {
+  min-height: 100vh;
+  background-color: #00bfa5;
+}
+
+/* Product Card CSS */
+
+.card {
+  border: 1.5px solid #00bfa5;
+}
+
+.card:hover {
+  transition: 300ms ease;
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  -o-transform: scale(1.04);
+  transform: scale(1.04);
+}
