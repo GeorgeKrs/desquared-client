@@ -1,32 +1,28 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faEuroSign } from "@fortawesome/free-solid-svg-icons";
+import { IProduct } from "../interfaces/product";
 
 interface Props {
-  name?: string;
-  description?: string;
-  id?: number;
-  imageUrl?: string;
-  price?: number;
+  product: IProduct;
 }
 
-const ProductCard = (props: Props) => {
+const ProductCard = ({ product }: Props) => {
   return (
-    <div className="m-2 card" style={{ maxWidth: "300px" }}>
+    <div key={product.id} className="m-2 card" style={{ maxWidth: "300px" }}>
       <img
+        style={{ minHeight: "270px" }}
         className="card-img-top"
-        src={
-          "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=768,574"
-        }
+        src={product.imageUrl}
         alt="Card image cap"
       />
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <p className="my-0">
-            <b>Plate Name</b>
+            <b>{product.name}</b>
           </p>
           <b>
-            15.99
+            {product.price.toFixed(2)}
             <FontAwesomeIcon
               className="mx-1"
               size="1x"
@@ -34,10 +30,7 @@ const ProductCard = (props: Props) => {
             />
           </b>
         </div>
-        <p className="mt-2 text-secondary">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
+        <p className="mt-2 text-secondary">{product.description}</p>
       </div>
 
       <button className="m-1 btn btn-outline-dark btn-custom">

@@ -1,36 +1,82 @@
-import { NavLink } from "react-router-dom";
+import { food_categories } from "../../constants/food_categories";
+import { useDispatch } from "react-redux";
+import { selectedCategoryActions } from "../../store/SelectedCategory";
 
-const Navigation = () => {
+interface Props {
+  selectedCategory: string;
+}
+
+const Navigation = ({ selectedCategory }: Props) => {
+  const dispath = useDispatch();
+
   return (
     <div className="flex-shrink-1">
-      <div className="d-flex flex-column navigation-style">
-        <NavLink
-          to="/appetizers"
-          className={({ isActive }) =>
-            isActive
-              ? "mt-4 p-2 navigation-item-selected"
-              : "mt-4 p-2 navigation-item"
+      <ul className="d-flex flex-column navigation-style list-group">
+        <a
+          className={
+            selectedCategory === food_categories.APPETIZERS
+              ? "navigation-item-selected"
+              : "navigation-item"
+          }
+          onClick={() =>
+            dispath(
+              selectedCategoryActions.storeSelectedCategory(
+                food_categories.APPETIZERS
+              )
+            )
           }
         >
           Appetizers
-        </NavLink>
-        <NavLink
-          to="/drinks"
-          className={({ isActive }) =>
-            isActive ? "p-2 navigation-item-selected" : "p-2 navigation-item"
+        </a>
+        <li
+          className={
+            selectedCategory === food_categories.DRINKS
+              ? "navigation-item-selected"
+              : "navigation-item"
+          }
+          onClick={() =>
+            dispath(
+              selectedCategoryActions.storeSelectedCategory(
+                food_categories.DRINKS
+              )
+            )
           }
         >
           Drinks
-        </NavLink>
-        <NavLink
-          to="/main-dishes"
-          className={({ isActive }) =>
-            isActive ? "p-2 navigation-item-selected" : "p-2 navigation-item"
+        </li>
+        <li
+          className={
+            selectedCategory === food_categories.MAIN_DISHES
+              ? "navigation-item-selected"
+              : "navigation-item"
+          }
+          onClick={() =>
+            dispath(
+              selectedCategoryActions.storeSelectedCategory(
+                food_categories.MAIN_DISHES
+              )
+            )
           }
         >
           Main dishes
-        </NavLink>
-      </div>
+        </li>
+        {/* <li
+          className={
+            selectedCategory === food_categories.SHOW_ALL
+              ? "navigation-item-selected"
+              : "navigation-item"
+          }
+          onClick={() =>
+            dispath(
+              selectedCategoryActions.storeSelectedCategory(
+                food_categories.SHOW_ALL
+              )
+            )
+          }
+        >
+          Show All
+        </li> */}
+      </ul>
     </div>
   );
 };
