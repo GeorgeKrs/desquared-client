@@ -4,7 +4,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { fetchCart } from "../../util/cart";
 import { useDispatch, useSelector } from "react-redux";
-import cart, { cartActions } from "../../store/cart";
+import { cartActions } from "../../store/cart";
 import Cart from "../../components/Cart";
 
 const Footer = () => {
@@ -16,13 +16,15 @@ const Footer = () => {
   const cartLoader = useSelector((state: any) => state.cart.loader);
 
   useEffect(() => {
-    setCartItems(fetchCart()?.length);
+    if (cartLoader) {
+      setCartItems(fetchCart()?.length);
 
-    if (cartItems === null) {
-      setCartItems(0);
+      if (cartItems === null || cartItems === undefined) {
+        setCartItems(0);
+      }
+
+      dispatch(cartActions.modifyLoader(false));
     }
-
-    dispatch(cartActions.modifyLoader(false));
   }, [cartLoader]);
 
   return (
@@ -43,7 +45,7 @@ const Footer = () => {
           {!showCart && cartLoader ? "Please Wait..." : "See Cart"}
 
           <span className="m-1 px-2 bg-light border border-light rounded text-dark">
-            {cartItems}
+            {cartItems === null || cartItems === undefined ? 0 : cartItems}
           </span>
         </button>
       </div>

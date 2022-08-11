@@ -9,8 +9,12 @@ export const fetchCart = () => {
 export const addToCart = (product: IProduct) => {
   let cart: any = localStorage.getItem("cart");
   cart = JSON.parse(cart);
+
+  if (cart === null || cart.length === 0) {
+    cart = [];
+  }
+
   cart.push({ product: product, quantity: 1 });
-  console.log(cart);
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
