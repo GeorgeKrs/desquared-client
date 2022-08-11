@@ -1,6 +1,7 @@
 import Header from "./Header";
 import ProductCard from "../../UI/ProductCard";
 import { IProduct } from "../../interfaces/product";
+import { food_categories } from "../../constants/food_categories";
 
 interface Props {
   selectedCategory: string;
@@ -70,7 +71,7 @@ const Products = ({ selectedCategory }: Props) => {
     },
   ];
 
-  const showAll = true;
+  const showAll = false;
 
   return (
     <div className="flex-grow-1 bg-light ">
@@ -78,16 +79,16 @@ const Products = ({ selectedCategory }: Props) => {
       <hr className="mb-0" style={{ color: "#00bfa5" }} />
 
       <div className="m-4 p-4 d-flex flex-wrap justify-content-center">
-        {showAll &&
+        {Object.values(selectedCategory)[0] === food_categories.SHOW_ALL &&
           dumpData.map((product: IProduct) => (
-            <ProductCard product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
 
-        {!showAll &&
+        {Object.values(selectedCategory)[0] !== food_categories.SHOW_ALL &&
           dumpData.map(
             (product: IProduct) =>
-              product.category === selectedCategory && (
-                <ProductCard product={product} />
+              product.category === Object.values(selectedCategory)[0] && (
+                <ProductCard key={product.id} product={product} />
               )
           )}
       </div>

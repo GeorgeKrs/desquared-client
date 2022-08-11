@@ -1,11 +1,11 @@
 // import from redux
 import { configureStore } from "@reduxjs/toolkit";
 // import store functionality
-import selectedTab_Reducer from "./SelectedCategory";
+import selectedCategory_Reducer from "./SelectedCategory";
 
 const store = configureStore({
   reducer: {
-    selectedTab: selectedTab_Reducer,
+    selectedCategory: selectedCategory_Reducer,
   },
 });
 

@@ -9,11 +9,7 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <div
-      key={product.id + Math.random()}
-      className="m-2 card"
-      style={{ maxWidth: "300px" }}
-    >
+    <div className="m-2 card" style={{ maxWidth: "300px" }}>
       <img
         style={{ minHeight: "270px" }}
         className="card-img-top"

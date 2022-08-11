@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import Products from "./Products";
 
 const Home = () => {
-  const selectedCategory = useSelector((state: any) => state.selectedTab);
+  const selectedCategory = useSelector((state: any) => state.selectedCategory);
 
   return (
     <div>
