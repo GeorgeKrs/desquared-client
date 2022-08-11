@@ -1,11 +1,15 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/cart";
 
 const CompanyInformation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const redirectHandler = () => {
     if (location.pathname === "/admin") {
+      dispatch(cartActions.modifyLoader(true));
       navigate("/");
     } else {
       navigate("/admin");
