@@ -12,7 +12,17 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState<IProduct[] | null>(fetchCart());
   const cartLoader = useSelector((state: any) => state.cart.loader);
 
+  const [fullname, setFullname] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("");
+  const [comments, setComments] = useState<string>("");
+
   let orderCost: number = 0;
+
+  let noCustomerInfo =
+    fullname.trim() !== "" &&
+    streetAddress.trim() !== "" &&
+    mobile.trim() !== "";
 
   const emptyCartHandler = () => {
     emptyCart();
@@ -64,7 +74,6 @@ const Cart = () => {
               )}
             </ul>
           </div>
-
           <div className="d-flex justify-content-end">
             Order Cost: {orderCost.toFixed(2)}
             <FontAwesomeIcon
@@ -74,6 +83,38 @@ const Cart = () => {
             />
           </div>
           <hr />
+          <h4 className="mt-5 text-center">Customer Information</h4>
+          <form className="mt-4 mb-4">
+            <label>*Fullname:</label>
+            <input
+              type="text"
+              className="mb-3 form-control"
+              onChange={(e) => setFullname(e.target.value)}
+            />
+            <label>*Street Address:</label>
+            <input
+              type="text"
+              className="mb-3 form-control"
+              onChange={(e) => setStreetAddress(e.target.value)}
+            />
+            <label>*Mobile:</label>
+            <input
+              type="text"
+              className="mb-3 form-control"
+              onChange={(e) => setMobile(e.target.value)}
+            />
+            <label>Comments:</label>
+            <textarea
+              rows={3}
+              className="mb-1 form-control"
+              onChange={(e) => setComments(e.target.value)}
+            />
+            {!noCustomerInfo && (
+              <p className="text-danger">
+                Please fill all * input areas to proceed with your order.
+              </p>
+            )}
+          </form>
           <div className="d-flex justify-content-between">
             <button
               className="mx-1 btn btn-outline-danger"
@@ -85,7 +126,9 @@ const Cart = () => {
             <button
               className="btn btn-outline-dark"
               onClick={() => console.log("API FOR PAYMENT")}
-              disabled={cartItems === null || cartItems.length === 0}
+              disabled={
+                cartItems === null || cartItems.length === 0 || !noCustomerInfo
+              }
             >
               Place Order
             </button>
