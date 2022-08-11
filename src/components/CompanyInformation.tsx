@@ -29,12 +29,3 @@ const CompanyInformation = () => {
 };
 
 export default CompanyInformation;
-// 8mgoAoZ0vhQdt7bX
-// 8mgoAoZ0vhQdt7bX
-// 8mgoAoZ0vhQdt7bX
-// 8mgoAoZ0vhQdt7bX
-// 8mgoAoZ0vhQdt7bX
-// 8mgoAoZ0vhQdt7bX
-
-// testUser = WYmVOrb92AuKRcXq
-// testUser = WYmVOrb92AuKRcXq

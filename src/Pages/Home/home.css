@@ -47,9 +47,8 @@
 }
 
 /* Product Card CSS */
-
 .card {
-  border: 1.5px solid #00bfa5;
+  border: 2px solid #00bfa5;
 }
 
 .card:hover {
@@ -59,4 +58,17 @@
   -ms-transform: scale(1.04);
   -o-transform: scale(1.04);
   transform: scale(1.04);
+}
+
+/* Cart CSS */
+.cart-style {
+  overflow-y: scroll;
+  max-height: 400px;
+  border: 2px solid #00bfa5;
+}
+
+@media (max-width: 575.98px) {
+  #navigation-item {
+    max-height: 300px !important;
+  }
 }
