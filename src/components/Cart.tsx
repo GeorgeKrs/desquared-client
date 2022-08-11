@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cart";
 import { fetchCart, emptyCart } from "../util/cart";
 import { response_categories } from "../constants/response_categories";
+import { currency_categories } from "../constants/currency_categories";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Cart = () => {
   const [streetAddress, setStreetAddress] = useState<string>("");
   const [mobile, setMobile] = useState<string>("");
   const [comments, setComments] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("EUR");
 
   let orderCost: number = 0;
 
@@ -49,6 +51,7 @@ const Cart = () => {
       comments,
       orderedAt: new Date(),
       paidMethod: "Credit Card",
+      currency,
       itemsOrdered: foodNamesOrdered,
       totalCost,
     };
@@ -153,11 +156,26 @@ const Cart = () => {
             <label>Comments:</label>
             <textarea
               rows={3}
-              className="mb-1 form-control"
+              className="mb-3 form-control"
               onChange={(e) => setComments(e.target.value)}
             />
+
+            <label>Currency:</label>
+            <select
+              className="form-control"
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              {Object.values(currency_categories).map((value) => {
+                return (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
+            </select>
+
             {!noCustomerInfo && (
-              <p className="text-danger">
+              <p className="mt-4 text-danger">
                 Please fill all * input areas to proceed with your order.
               </p>
             )}
