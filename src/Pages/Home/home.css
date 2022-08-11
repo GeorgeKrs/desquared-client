@@ -17,7 +17,6 @@
 
 .navigation-item a:hover {
   color: black;
-  text-decoration: underline !important;
   background-color: #a7ffeb !important;
   cursor: pointer;
 }
@@ -27,7 +26,6 @@
   background-color: #a7ffeb;
   font-size: 16px;
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .navigation-item-selected:hover {

@@ -6,11 +6,15 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cart";
 import { fetchCart, emptyCart } from "../util/cart";
+import { response_categories } from "../constants/response_categories";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState<IProduct[] | null>(fetchCart());
   const cartLoader = useSelector((state: any) => state.cart.loader);
+
+  const [loader, setLoader] = useState<boolean>(false);
+  const [responseMessage, setResponseMessage] = useState<string>("");
 
   const [fullname, setFullname] = useState<string>("");
   const [streetAddress, setStreetAddress] = useState<string>("");
@@ -27,6 +31,50 @@ const Cart = () => {
   const emptyCartHandler = () => {
     emptyCart();
     dispatch(cartActions.modifyLoader(true));
+  };
+
+  const placeOrder = async () => {
+    setLoader(true);
+
+    const foodNamesOrdered: any = [];
+
+    cartItems?.map((item: any) => foodNamesOrdered.push(item.product.name));
+
+    const totalCost = orderCost.toFixed(2);
+
+    const orderData = {
+      fullname,
+      streetAddress,
+      mobile,
+      comments,
+      orderedAt: new Date(),
+      paidMethod: "Credit Card",
+      itemsOrdered: foodNamesOrdered,
+      totalCost,
+    };
+
+    await fetch("http://127.0.0.1:3001/order", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    }).then((res) => {
+      if (res.status === 200) {
+        setResponseMessage(response_categories.SUCCESS);
+        setTimeout(() => {
+          emptyCartHandler();
+          setResponseMessage("");
+          setLoader(false);
+        }, 5000);
+      }
+
+      if (res.status === 500) {
+        setResponseMessage(response_categories.ERROR);
+        setLoader(false);
+      }
+    });
   };
 
   useEffect(() => {
@@ -114,22 +162,45 @@ const Cart = () => {
               </p>
             )}
           </form>
+
+          {responseMessage === response_categories.SUCCESS && (
+            <div className="mt-4 alert alert-success">
+              Order Placed Successfully! The cart will clear automatically in 5
+              seconds.
+            </div>
+          )}
+
+          {responseMessage === response_categories.ERROR && (
+            <div className="mt-4 alert alert-danger">
+              Unknown Error Occured. Please try again later.
+            </div>
+          )}
+
           <div className="d-flex justify-content-between">
             <button
               className="mx-1 btn btn-outline-danger"
               onClick={emptyCartHandler}
-              disabled={cartItems === null || cartItems.length === 0}
+              disabled={cartItems === null || cartItems.length === 0 || loader}
             >
               Empty Cart
             </button>
             <button
               className="btn btn-outline-dark"
-              onClick={() => console.log("API FOR PAYMENT")}
+              onClick={placeOrder}
               disabled={
-                cartItems === null || cartItems.length === 0 || !noCustomerInfo
+                cartItems === null ||
+                cartItems.length === 0 ||
+                !noCustomerInfo ||
+                loader
               }
             >
-              Place Order
+              {!loader && "Place Order"}
+              {loader && (
+                <>
+                  <span className="spinner-border spinner-border-sm"></span>
+                  <span className="mx-1">Please Wait...</span>
+                </>
+              )}
             </button>
           </div>
         </div>
