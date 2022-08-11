@@ -3,7 +3,7 @@ import { IProduct } from "../../interfaces/product";
 const OrdersTable = () => {
   const orderData: Array<IProduct> = [
     {
-      id: 1,
+      id: "1",
       imageUrl:
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
       name: "Chicken Burger",
@@ -13,7 +13,7 @@ const OrdersTable = () => {
       category: "Appetizers",
     },
     {
-      id: 2,
+      id: "2",
       imageUrl:
         "https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/foodiesfeed.jpg",
       name: "French Fries",
@@ -23,7 +23,7 @@ const OrdersTable = () => {
       category: "Appetizers",
     },
     {
-      id: 7,
+      id: "7",
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPsECMksXtlI8pNIN1JWOQ5-63CvMKlRp42GBItf2zi_I2mwmWKwjcIbApy-7ltF4zmWA&usqp=CAU",
       name: "Sprite 330ml",
