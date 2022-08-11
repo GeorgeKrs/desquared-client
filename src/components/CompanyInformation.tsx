@@ -23,8 +23,8 @@ const CompanyInformation = () => {
 
       <div>
         <button className="btn btn-outline-light" onClick={redirectHandler}>
-          {location.pathname === "/admin" && "Admin"}
-          {location.pathname !== "/admin" && "Shop"}
+          {location.pathname === "/admin" && "Shop"}
+          {location.pathname !== "/admin" && "Admin"}
         </button>
       </div>
     </div>
