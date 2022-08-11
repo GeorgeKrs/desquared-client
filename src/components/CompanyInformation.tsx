@@ -13,10 +13,7 @@ const CompanyInformation = () => {
   };
 
   return (
-    <div
-      className="p-4 d-flex justify-content-between sm:justify-content-center"
-      style={{ backgroundColor: "#00bfa5" }}
-    >
+    <div className="p-4 d-flex justify-content-between sm:justify-content-center bg-dark">
       <div>
         <h3 className="text-white">Restaurant Name</h3>
       </div>
@@ -32,3 +29,12 @@ const CompanyInformation = () => {
 };
 
 export default CompanyInformation;
+// 8mgoAoZ0vhQdt7bX
+// 8mgoAoZ0vhQdt7bX
+// 8mgoAoZ0vhQdt7bX
+// 8mgoAoZ0vhQdt7bX
+// 8mgoAoZ0vhQdt7bX
+// 8mgoAoZ0vhQdt7bX
+
+// testUser = WYmVOrb92AuKRcXq
+// testUser = WYmVOrb92AuKRcXq
