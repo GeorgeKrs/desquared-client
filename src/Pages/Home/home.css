@@ -4,6 +4,7 @@
 .navigation-style {
   min-height: 100vh;
   background-color: #00bfa5;
+  border-radius: 0 !important;
 }
 
 .navigation-item {
@@ -11,6 +12,7 @@
   font-size: 16px;
   cursor: pointer;
   text-decoration: none;
+  list-style: none;
 }
 
 .navigation-item a:hover {
@@ -30,6 +32,12 @@
 
 .navigation-item-selected:hover {
   color: black;
+}
+
+@media (max-width: 575.98px) {
+  #navigation-item {
+    padding: 5px 0px !important;
+  }
 }
 
 /* Header CSS */

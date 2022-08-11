@@ -10,11 +10,18 @@ const Navigation = ({ selectedCategory }: Props) => {
   const dispath = useDispatch();
 
   return (
-    <div className="flex-shrink-1">
+    <div className="flex-shrink-1 d-flex">
       <ul className="d-flex flex-column navigation-style list-group">
+        <li
+          id="navigation-item"
+          className="mt-5 mb-4 p-2 mx-auto navigation-item"
+        >
+          <b>MENU:</b>
+        </li>
         {Object.values(food_categories).map((value) => {
           return (
             <a
+              id="navigation-item"
               key={value}
               className={
                 Object.values(selectedCategory)[0] === value
