@@ -1,5 +1,11 @@
+import OrdersTable from "./OrdersTable";
+
 const Admin = () => {
-  return <div>Admin</div>;
+  return (
+    <div>
+      <OrdersTable />
+    </div>
+  );
 };
 
 export default Admin;

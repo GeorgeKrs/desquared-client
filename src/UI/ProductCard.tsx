@@ -11,7 +11,7 @@ const ProductCard = ({ product }: Props) => {
   return (
     <div className="m-2 card" style={{ maxWidth: "300px" }}>
       <img
-        style={{ minHeight: "270px" }}
+        style={{ height: "270px" }}
         className="card-img-top"
         src={product.imageUrl}
         alt="Card image cap"
