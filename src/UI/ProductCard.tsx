@@ -19,7 +19,7 @@ const ProductCard = ({ product }: Props) => {
   };
 
   return (
-    <div className="m-2 card" style={{ maxWidth: "300px" }}>
+    <div key={product.id} className="m-2 card" style={{ maxWidth: "300px" }}>
       <img
         style={{ height: "270px" }}
         className="card-img-top"

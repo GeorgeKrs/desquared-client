@@ -31,7 +31,6 @@ const Cart = () => {
 
   useEffect(() => {
     setCartItems(fetchCart());
-    console.log(cartItems);
   }, [cartLoader]);
 
   return (
@@ -44,7 +43,7 @@ const Cart = () => {
               {cartItems !== null &&
                 cartItems.length > 0 &&
                 cartItems.map((item: any) => (
-                  <>
+                  <div key={item.product.id}>
                     <div className="d-none">
                       {(orderCost += item.product.price)}
                     </div>
@@ -62,7 +61,7 @@ const Cart = () => {
                       {item.product.description}
                     </li>
                     <hr style={{ backgroundColor: "#00bfa5" }} />
-                  </>
+                  </div>
                 ))}
 
               {cartItems !== null && cartItems.length === 0 && (
