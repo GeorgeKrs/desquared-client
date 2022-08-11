@@ -29,7 +29,7 @@ const Footer = () => {
 
   return (
     <footer className="p-2 fixed-bottom bg-dark">
-      {showCart && <Cart setShowCart={setShowCart} />}
+      {showCart && <Cart />}
       <div className="d-flex justify-content-center text-white">
         <button
           className="m-1 btn btn-outline-light"
@@ -41,8 +41,10 @@ const Footer = () => {
             size="1x"
             icon={faShoppingCart as IconProp}
           />
-          {showCart && "Close Cart"}
-          {!showCart && cartLoader ? "Please Wait..." : "See Cart"}
+          {cartLoader && "Please Wait..."}
+
+          {showCart && !cartLoader && "Close Cart"}
+          {!showCart && !cartLoader && "See Cart"}
 
           <span className="m-1 px-2 bg-light border border-light rounded text-dark">
             {cartItems === null || cartItems === undefined ? 0 : cartItems}

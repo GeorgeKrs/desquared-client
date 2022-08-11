@@ -131,16 +131,6 @@ const Products = ({ selectedCategory }: Props) => {
               )
           )}
       </div>
-      <button className="btn btn-danger" onClick={emptyCart}>
-        Empty Cart
-      </button>
-
-      <button
-        className="btn btn-success"
-        onClick={() => console.log(localStorage.getItem("cart"))}
-      >
-        SHOW CART ITEMS
-      </button>
     </div>
   );
 };

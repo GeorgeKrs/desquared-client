@@ -1,42 +1,28 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import { IProduct } from "../interfaces/product";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../store/cart";
+import { fetchCart, emptyCart } from "../util/cart";
 
-interface Props {
-  setShowCart: any;
-}
+const Cart = () => {
+  const dispatch = useDispatch();
+  const [cartItems, setCartItems] = useState<IProduct[] | null>(fetchCart());
+  const cartLoader = useSelector((state: any) => state.cart.loader);
 
-const Cart = ({ setShowCart }: Props) => {
-  const cartData: Array<IProduct> = [
-    {
-      id: 1,
-      imageUrl:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-      name: "Plate Name",
-      price: 15.99,
-      description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      category: "Appetizers",
-    },
-    {
-      id: 2,
-      imageUrl:
-        "https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/foodiesfeed.jpg",
-      name: "Plate Name",
-      price: 12.49,
-      description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      category: "Appetizers",
-    },
-    {
-      id: 7,
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPsECMksXtlI8pNIN1JWOQ5-63CvMKlRp42GBItf2zi_I2mwmWKwjcIbApy-7ltF4zmWA&usqp=CAU",
-      name: "Plate Name",
-      price: 3.5,
-      description:
-        "Some quick example text to build on the card title and make up the bulk of the card's content.",
-      category: "Drinks",
-    },
-  ];
+  let orderCost: number = 0;
+
+  const emptyCartHandler = () => {
+    emptyCart();
+    dispatch(cartActions.modifyLoader(true));
+  };
+
+  useEffect(() => {
+    setCartItems(fetchCart());
+    console.log(cartItems);
+  }, [cartLoader]);
 
   return (
     <>
@@ -45,21 +31,61 @@ const Cart = ({ setShowCart }: Props) => {
           <div className="">
             <h5 className="">Your order so far:</h5>
             <ul className="list-group">
-              {cartData.map((product: IProduct) => (
-                <>
-                  <li className="list-group-item">{product.name}</li>
-                  <li className="list-group-item">{product.price}</li>
-                  <li className="list-group-item">{product.description}</li>
-                  <hr />
-                </>
-              ))}
+              {cartItems !== null &&
+                cartItems.length > 0 &&
+                cartItems.map((item: any) => (
+                  <>
+                    <div className="d-none">
+                      {(orderCost += item.product.price)}
+                    </div>
+
+                    <li className="list-group-item">{item.product.name}</li>
+                    <li className="list-group-item">
+                      {item.product.price.toFixed(2)}
+                      <FontAwesomeIcon
+                        className="mx-1"
+                        size="1x"
+                        icon={faEuroSign as IconProp}
+                      />
+                    </li>
+                    <li className="list-group-item">
+                      {item.product.description}
+                    </li>
+                    <hr style={{ backgroundColor: "#00bfa5" }} />
+                  </>
+                ))}
+
+              {cartItems !== null && cartItems.length === 0 && (
+                <div>
+                  <p className="text-danger">
+                    Your cart is empty. Please add more products!
+                  </p>
+                </div>
+              )}
             </ul>
           </div>
 
           <div className="d-flex justify-content-end">
+            Order Cost: {orderCost.toFixed(2)}
+            <FontAwesomeIcon
+              className="mx-1 my-auto"
+              size="1x"
+              icon={faEuroSign as IconProp}
+            />
+          </div>
+          <hr />
+          <div className="d-flex justify-content-between">
+            <button
+              className="mx-1 btn btn-outline-danger"
+              onClick={emptyCartHandler}
+              disabled={cartItems === null || cartItems.length === 0}
+            >
+              Empty Cart
+            </button>
             <button
               className="btn btn-outline-dark"
-              onClick={() => setShowCart(false)}
+              onClick={() => console.log("API FOR PAYMENT")}
+              disabled={cartItems === null || cartItems.length === 0}
             >
               Place Order
             </button>
