@@ -2,6 +2,7 @@ import Header from "./Header";
 import ProductCard from "../../UI/ProductCard";
 import { IProduct } from "../../interfaces/product";
 import { food_categories } from "../../constants/food_categories";
+import { emptyCart } from "../../util/cart";
 
 interface Props {
   selectedCategory: string;
@@ -130,6 +131,16 @@ const Products = ({ selectedCategory }: Props) => {
               )
           )}
       </div>
+      <button className="btn btn-danger" onClick={emptyCart}>
+        Empty Cart
+      </button>
+
+      <button
+        className="btn btn-success"
+        onClick={() => console.log(localStorage.getItem("cart"))}
+      >
+        SHOW CART ITEMS
+      </button>
     </div>
   );
 };
