@@ -42,7 +42,7 @@ const Cart = () => {
 
     cartItems?.map((item: any) => foodNamesOrdered.push(item.product.name));
 
-    const totalCost = orderCost.toFixed(2);
+    const totalCost_EUR = parseFloat(orderCost.toFixed(2));
 
     const orderData = {
       fullname,
@@ -53,7 +53,8 @@ const Cart = () => {
       paidMethod: "Credit Card",
       currency,
       itemsOrdered: foodNamesOrdered,
-      totalCost,
+      totalCost_EUR,
+      totalCost_OtherCurrency: 0,
     };
 
     await fetch("http://127.0.0.1:3001/order", {

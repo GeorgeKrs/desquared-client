@@ -114,13 +114,15 @@ const Products = ({ selectedCategory }: Props) => {
   // ];
 
   const [menuData, setMenuData] = useState<IProduct[]>();
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(true);
+  const [errorFetchingData, setErrorFatchingData] = useState<boolean>(false);
 
   const fetchMenu = async () => {
     await fetch("http://127.0.0.1:3001/menu")
       .then((res) => res.json())
       .then((data) => setMenuData(data))
-      .finally(() => setLoader(false));
+      .finally(() => setLoader(false))
+      .catch(() => setErrorFatchingData(true));
   };
 
   useEffect(() => {
@@ -129,9 +131,29 @@ const Products = ({ selectedCategory }: Props) => {
 
   return (
     <div className="mb-5 flex-grow-1">
-      <Header selectedCategory={selectedCategory} />
+      <Header
+        selectedCategory={selectedCategory}
+        loader={loader}
+        errorFetchingData={errorFetchingData}
+      />
 
-      {loader && <div>Please Wait...</div>}
+      {loader && (
+        <div className="mt-5 d-flex justify-content-center">
+          <div className="my-auto spinner-border"></div>
+          <div className="my-auto mx-1">
+            <b>Fetching menu...</b>
+          </div>
+        </div>
+      )}
+
+      {!loader && errorFetchingData && (
+        <div
+          className="alert alert-danger d-flex align-items-center justify-content-center"
+          style={{ marginTop: "30vh" }}
+        >
+          Failed to fetch menu data. Please try again later.
+        </div>
+      )}
 
       {!loader && (
         <div className="m-4 p-4 d-flex flex-wrap justify-content-center">
