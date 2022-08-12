@@ -55,6 +55,7 @@ const Cart = () => {
       itemsOrdered: foodNamesOrdered,
       totalCost_EUR,
       totalCost_OtherCurrency: 0,
+      status: "Pending",
     };
 
     await fetch("http://127.0.0.1:3001/order", {
