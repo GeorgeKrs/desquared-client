@@ -134,6 +134,7 @@ const Cart = () => {
               icon={faEuroSign as IconProp}
             />
           </div>
+          Order Cost: {orderCost.toFixed(2)}
           <hr />
           <h4 className="mt-5 text-center">Customer Information</h4>
           <form className="mt-4 mb-4">
@@ -182,20 +183,26 @@ const Cart = () => {
               </p>
             )}
           </form>
-
           {responseMessage === response_categories.SUCCESS && (
             <div className="mt-4 alert alert-success">
               Order Placed Successfully! The cart will clear automatically in 5
               seconds.
             </div>
           )}
-
           {responseMessage === response_categories.ERROR && (
             <div className="mt-4 alert alert-danger">
               Unknown Error Occured. Please try again later.
             </div>
           )}
-
+          <div className="d-flex justify-content-end">
+            Order Cost: {orderCost.toFixed(2)}
+            <FontAwesomeIcon
+              className="mx-1 my-auto"
+              size="1x"
+              icon={faEuroSign as IconProp}
+            />
+          </div>
+          <hr />
           <div className="d-flex justify-content-between">
             <button
               className="mx-1 btn btn-outline-danger"
