@@ -1,4 +1,5 @@
 import { IOrder } from "../../interfaces/order";
+import { dateConverter } from "../../util/date-converter";
 
 interface Props {
   orderData: IOrder[];
@@ -6,11 +7,12 @@ interface Props {
 
 const OrdersTable = ({ orderData }: Props) => {
   return (
-    <div className="mt-5 p-5 table-responsive" style={{ fontWeight: "bolder" }}>
-      <div className="d-flex justify-content-between">
-        <h4>Incoming Orders:</h4>
-        <button className="btn btn-outline-dark">Fetch Orders</button>
-      </div>
+    <div
+      className="mt-5 p-5 table-responsive text-center"
+      style={{ fontWeight: "bolder" }}
+    >
+      <h4>Incoming Orders:</h4>
+
       <table className="mt-2 table table-striped border border-dark">
         <thead>
           <tr>
@@ -41,7 +43,8 @@ const OrdersTable = ({ orderData }: Props) => {
               }
             >
               <th>{index + 1}</th>
-              <td>{order.orderedAt.replace("T", " | ").replace(".", " ")}</td>
+              {dateConverter(order.orderedAt)}
+              {/* <td>{() => dateConverter(order.orderedAt)}</td> */}
               <td>{order.status}</td>
               <td>{order.paidMethod}</td>
               <td>{order.totalCost_EUR.toFixed(2)}</td>

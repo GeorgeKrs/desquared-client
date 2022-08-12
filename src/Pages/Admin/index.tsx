@@ -2,12 +2,16 @@ import { useState, useEffect } from "react";
 import { response_categories } from "../../constants/response_categories";
 import { IOrder } from "../../interfaces/order";
 import OrdersTable from "./OrdersTable";
+import openSocket from "socket.io-client";
 
 const Admin = () => {
   const [orderData, setOrderData] = useState<IOrder[]>([]);
 
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState<boolean>(true);
+  const [newOrder, setNewOrder] = useState<boolean>(false);
   const [errorFatchingData, setErrorFatchingData] = useState<string>("");
+
+  const socket = openSocket("http://localhost:3002");
 
   const fetchOrders = async () => {
     await fetch("http://127.0.0.1:3001/orders")
@@ -18,8 +22,16 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    if (loader || newOrder) {
+      fetchOrders();
+      console.log("inside fetching");
+    }
+    console.log("inside useeffect");
+
+    socket.on("orders", (newOrder: any) => {
+      setNewOrder(true);
+    });
+  }, [newOrder]);
 
   return (
     <div>
