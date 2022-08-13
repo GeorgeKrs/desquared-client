@@ -13,7 +13,7 @@ const OrdersTable = ({ orderData }: Props) => {
     >
       <h4>Incoming Orders:</h4>
 
-      <table className="mt-2 table table-striped border border-dark">
+      <table className="mt-2 table border border-dark">
         <thead>
           <tr>
             <th>#</th>

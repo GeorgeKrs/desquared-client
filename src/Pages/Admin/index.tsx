@@ -17,16 +17,17 @@ const Admin = () => {
     await fetch("http://127.0.0.1:3001/orders")
       .then((res) => res.json())
       .then((data) => setOrderData(data))
-      .finally(() => setLoader(false))
+      .finally(() => {
+        setNewOrder(false);
+        setLoader(false);
+      })
       .catch(() => setErrorFatchingData(response_categories.ERROR));
   };
 
   useEffect(() => {
     if (loader || newOrder) {
       fetchOrders();
-      console.log("inside fetching");
     }
-    console.log("inside useeffect");
 
     socket.on("orders", (newOrder: any) => {
       setNewOrder(true);
